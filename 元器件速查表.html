@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>电子元器件速查表（进实验室揣兜里）</title>
+<style>
+  /* 屏幕上的样式 */
+  body { font-family: "Microsoft YaHei", "SimHei", sans-serif; max-width: 900px;
+         margin: 0 auto; padding: 20px; color: #222; line-height: 1.6; }
+  h1 { text-align: center; color: #1a5490; border-bottom: 3px solid #1a5490; padding-bottom: 10px; }
+  h2 { color: #1a5490; border-left: 5px solid #1a5490; padding-left: 10px; margin-top: 28px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 14px; }
+  th, td { border: 1px solid #666; padding: 6px 8px; text-align: left; }
+  th { background: #e8f0f8; }
+  .warn { background: #fff4e5; border: 1px solid #e0a800; padding: 10px; margin: 10px 0; }
+  .danger { background: #ffe8e8; border: 1px solid #d00000; padding: 10px; margin: 10px 0; }
+  .tip { background: #eaf7ea; border: 1px solid #28a745; padding: 10px; margin: 10px 0; }
+  code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-size: 14px; }
+  .formula { text-align: center; font-size: 18px; background: #f7f7f7; padding: 12px; margin: 10px 0; }
+  .footer { text-align: center; color: #888; font-size: 12px; margin-top: 30px; }
+
+  /* 打印时的样式：A4、黑白友好、表格不跨页断裂 */
+  @media print {
+    @page { size: A4 portrait; margin: 12mm; }
+    body { max-width: 100%; padding: 0; font-size: 11pt; }
+    h1 { font-size: 18pt; }
+    h2 { font-size: 13pt; page-break-after: avoid; }
+    table { font-size: 9pt; page-break-inside: auto; }
+    tr { page-break-inside: avoid; }
+    th { background: #ddd !important; }
+    .page-break { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<h1>🔧 电子元器件速查表</h1>
+<p style="text-align:center;color:#666;">电气工程 · 硬件入门 · 建议打印成 A4 随身携带</p>
+
+<div class="danger">
+<b>⚡ 安全三条铁律</b><br>
+1. 实训只碰 <b>36V 以下</b>的电，<b>绝不碰 220V 市电</b><br>
+2. 通电前检查三遍，<b>不确定就问学长</b><br>
+3. 大电容断电后仍带电，碰前先放电
+</div>
+
+<h2>一、常用元器件</h2>
+<table>
+<tr><th>名称</th><th>外观</th><th>作用</th><th>怎么认极性 / 参数</th></tr>
+<tr><td><b>电阻</b></td><td>小圆柱带色环</td><td>限流、分压</td><td>读色环（见下表），注意功率 1/4W</td></tr>
+<tr><td><b>电容</b></td><td>圆片 / 铝壳 / 黄方块</td><td>储能、滤波、隔直通交</td><td>电解电容：<b>白条那端是负极</b>，接反会炸</td></tr>
+<tr><td><b>电感</b></td><td>线圈 / 工字型</td><td>储能、滤波</td><td>看标注 µH / mH</td></tr>
+<tr><td><b>二极管</b></td><td>黑小圆柱一端银环</td><td>单向导电、整流</td><td><b>银环端 = 负极</b>，电流只能顺箭头走</td></tr>
+<tr><td><b>LED</b></td><td>彩色透明小灯</td><td>指示灯</td><td><b>长脚 = 正极</b>；内部小金属片接正极</td></tr>
+<tr><td><b>三极管</b></td><td>黑色半圆三只脚</td><td>放大、开关</td><td>看型号查 B/C/E 极（如 S8050）</td></tr>
+<tr><td><b>MOS管</b></td><td>黑方块三只脚</td><td>大电流开关</td><td>效率高发热小，怕静电</td></tr>
+<tr><td><b>运放</b></td><td>黑长条 8 脚</td><td>放大、电压比较</td><td>常见 LM358、LM324</td></tr>
+<tr><td><b>晶振</b></td><td>银色小椭圆</td><td>给单片机提供时钟</td><td>常见 8MHz、11.0592MHz</td></tr>
+<tr><td><b>排针</b></td><td>一排金属针</td><td>接线</td><td>标准间距 2.54mm</td></tr>
+</table>
+
+<div class="warn">
+<b>💡 记忆口诀：</b>发光二极管长脚正，黑管银环是负极，电解电容白条负。
+</div>
+
+<h2>二、色环电阻速查（四环）</h2>
+<table>
+<tr><th>颜色</th><th>第1环</th><th>第2环</th><th>第3环（倍率）</th><th>第4环（误差）</th></tr>
+<tr><td>黑</td><td>0</td><td>0</td><td>×1</td><td>—</td></tr>
+<tr><td>棕</td><td>1</td><td>1</td><td>×10</td><td>±1%</td></tr>
+<tr><td>红</td><td>2</td><td>2</td><td>×100</td><td>±2%</td></tr>
+<tr><td>橙</td><td>3</td><td>3</td><td>×1 k</td><td>—</td></tr>
+<tr><td>黄</td><td>4</td><td>4</td><td>×10 k</td><td>—</td></tr>
+<tr><td>绿</td><td>5</td><td>5</td><td>×100 k</td><td>—</td></tr>
+<tr><td>蓝</td><td>6</td><td>6</td><td>×1 M</td><td>—</td></tr>
+<tr><td>紫</td><td>7</td><td>7</td><td>—</td><td>—</td></tr>
+<tr><td>灰</td><td>8</td><td>8</td><td>—</td><td>—</td></tr>
+<tr><td>白</td><td>9</td><td>9</td><td>—</td><td>—</td></tr>
+<tr><td>金</td><td>—</td><td>—</td><td>×0.1</td><td>±5%</td></tr>
+<tr><td>银</td><td>—</td><td>—</td><td>×0.01</td><td>±10%</td></tr>
+</table>
+<p><b>例子：</b>棕黑红金 = 1 0 ×100 = <b>1000 Ω = 1 kΩ</b>，误差 ±5%</p>
+
+<h2>三、LED 限流电阻（最常算的公式）</h2>
+<div class="formula">
+R = ( U<sub>电源</sub> − n × U<sub>LED</sub> ) ÷ I
+</div>
+<p>其中 n = 串联的 LED 个数，I 一般取 <b>10~20 mA</b></p>
+
+<table>
+<tr><th>LED 颜色</th><th>正向压降 U<sub>LED</sub></th></tr>
+<tr><td>红色</td><td>1.8 ~ 2.0 V</td></tr>
+<tr><td>黄 / 绿色</td><td>2.0 ~ 2.2 V</td></tr>
+<tr><td>蓝 / 白 / 翠绿</td><td>3.0 ~ 3.4 V</td></tr>
+</table>
+
+<table>
+<tr><th>场景</th><th>电源</th><th>LED</th><th>算出电阻</th><th>常用取值</th></tr>
+<tr><td>Arduino 指示灯</td><td>5 V</td><td>红 1 个 @10mA</td><td>300 Ω</td><td><b>330 Ω</b></td></tr>
+<tr><td>Arduino 指示灯</td><td>5 V</td><td>蓝 1 个 @10mA</td><td>170 Ω</td><td><b>220 Ω</b></td></tr>
+<tr><td>STM32 指示灯</td><td>3.3 V</td><td>红 1 个 @10mA</td><td>130 Ω</td><td><b>150 Ω</b></td></tr>
+<tr><td>12 V 指示灯</td><td>12 V</td><td>红 1 个 @10mA</td><td>1000 Ω</td><td><b>1 kΩ</b></td></tr>
+</table>
+
+<div class="tip">
+<b>功率别忘算：</b>P = I² × R。一般取 <b>2 倍余量</b>选封装，
+10mA 下算出的 1/4W 电阻绰绰有余。
+</div>
+
+<div class="page-break"></div>
+
+<h2>四、万用表怎么用</h2>
+<table>
+<tr><th>档位</th><th>测什么</th><th>怎么接</th><th>注意事项</th></tr>
+<tr><td>蜂鸣档</td><td>通断</td><td>两点各接一表笔</td><td>响 = 导通</td></tr>
+<tr><td>电压档</td><td>电压</td><td><b>并联</b>在元件两端</td><td>先选大量程再往下调</td></tr>
+<tr><td>电阻档</td><td>阻值</td><td>接元件两端</td><td><b>必须断电测</b></td></tr>
+<tr><td>电流档</td><td>电流</td><td><b>串联</b>进回路</td><td>⚠️ 表笔要换插孔</td></tr>
+</table>
+
+<div class="danger">
+<b>🔥 新手第一大坑：</b>用电流档（或表笔插在电流孔）去测电压
+= <b>直接短路，烧保险丝甚至烧表</b>。<br>
+<b>每次测之前，先看一眼表笔插在哪个孔！</b>
+</div>
+
+<h2>五、焊接要点</h2>
+<table>
+<tr><th>步骤</th><th>动作</th><th>时间</th></tr>
+<tr><td>1 预热</td><td>烙铁同时碰<b>焊盘和元件脚</b></td><td>1~2 秒</td></tr>
+<tr><td>2 送丝</td><td>锡丝送到<b>烙铁与焊盘交界处</b></td><td>锡融化即止</td></tr>
+<tr><td>3 撤锡</td><td>先拿开锡丝</td><td>—</td></tr>
+<tr><td>4 撤离</td><td>再拿开烙铁</td><td>—</td></tr>
+<tr><td>5 检查</td><td>好焊点 = <b>圆锥形、亮闪闪</b></td><td>—</td></tr>
+</table>
+
+<table>
+<tr><th>毛病</th><th>长什么样</th><th>后果</th></tr>
+<tr><td>虚焊</td><td>灰暗、圆球状</td><td>时通时断，<b>最难查</b></td></tr>
+<tr><td>连锡</td><td>相邻两点被锡连上</td><td>短路</td></tr>
+<tr><td>锡过多</td><td>一个大锡球</td><td>易碰旁边焊点</td></tr>
+</table>
+<p><b>补救：</b>加一点松香，烙铁再碰一下即可。</p>
+
+<h2>六、电路不工作？按这个顺序查</h2>
+<table>
+<tr><th>顺序</th><th>检查项</th><th>常见原因</th></tr>
+<tr><td>1</td><td>电源有没有电</td><td>没开电源 / 线断了</td></tr>
+<tr><td>2</td><td><b>地线 GND 连了吗</b></td><td>90% 的新手错误在这</td></tr>
+<tr><td>3</td><td>元件有没有接反</td><td>LED、电容、二极管</td></tr>
+<tr><td>4</td><td>有没有虚焊</td><td>用万用表蜂鸣档查</td></tr>
+<tr><td>5</td><td>有没有短路</td><td>摸芯片烫不烫</td></tr>
+<tr><td>6</td><td>元件是不是烧了</td><td>闻有没有焦味</td></tr>
+</table>
+
+<div class="warn">
+<b>核心思维：电流必须形成回路。</b>
+从电源正极出发 → 经过负载 → 回到负极，<b>中间任何一处断开都不工作</b>。
+</div>
+
+<h2>七、常见芯片与模块</h2>
+<table>
+<tr><th>型号</th><th>是什么</th><th>典型用途</th></tr>
+<tr><td>NE555</td><td>定时器芯片</td><td>闪灯、PWM、延时</td></tr>
+<tr><td>LM7805</td><td>三端稳压</td><td>把 7~12V 稳成 5V</td></tr>
+<tr><td>LM358</td><td>双运放</td><td>信号放大、电压比较</td></tr>
+<tr><td>AMS1117-3.3</td><td>低压差稳压</td><td>5V 转 3.3V</td></tr>
+<tr><td>L298N</td><td>电机驱动</td><td>驱动直流电机</td></tr>
+<tr><td>Arduino UNO</td><td>入门单片机板</td><td>快速原型</td></tr>
+<tr><td>STM32F103</td><td>主流单片机</td><td>电赛主力</td></tr>
+</table>
+
+<div class="tip">
+<b>给你的建议：</b>你是<b>会写代码的硬件新人</b>，这在硬件部很稀有。
+进部后主动说一句"我会一点 Python"，
+做数据处理、信号分析的项目时你就会被优先叫上。
+</div>
+
+<p class="footer">
+打印方法：浏览器打开本文件 → Ctrl + P → 打印机选"另存为 PDF" → 记得勾选"背景图形"
+</p>
+
+</body>
+</html>

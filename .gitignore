@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# 编辑器
+.vscode/
+.idea/
+
+# 系统
+.DS_Store
+Thumbs.db
